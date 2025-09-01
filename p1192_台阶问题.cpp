@@ -1,19 +1,29 @@
-// ===== crazy solution =====
+// ===== my solution2  =====
+// it is too easy to TLE
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-  const int mod = 100003;
-  int dp[100005];
-  int n, k;
+int cnt_ways(int n, int k) {
+    if (n==0)
+        return 1;
+    if (n<0)
+        return 0;
+    if (k<=0)
+        return 0;
 
-  cin >> n >> k;
-
-  for (int i=1; i<=n; i++) {
-    for (int j=1; j<=k; j++) {
-      
+    int ways = 0;
+    for (int i=1; i<=k; ++i) {
+        ways += cnt_ways(n-i, k);
     }
-  }
+    return ways;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    int ways = cnt_ways(n, k);
+
+    cout << ways;
 }
 
 
