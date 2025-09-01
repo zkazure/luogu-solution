@@ -1,3 +1,14 @@
+// // ======= crazy solution ===========
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// int main() {
+//     int n, k;
+//     cin >> n >> k;
+//     int dp[205][10] = {0};
+//     dp[]
+// }
+
 // ========= my solution1 =========
 // this is right, but too easy to TLE
 #include <bits/stdc++.h>
