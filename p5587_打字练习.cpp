@@ -1,75 +1,67 @@
+// This is a typical problem
+// you are easy to omit the < in article
+// I don't think this is a good problem
 #include <bits/stdc++.h>
 using namespace std;
 
+int count_type(string a, string b) {
+    char* arti = &a[0];
+    char* type = &b[0];
+    int cnt = 0;
+    while (*type!='\0') {
+        int more_arti = 0;
+        while (*arti=='\0' && *type!='\0') {
+            if (*type=='<')
+                more_arti--;
+            else more_arti++, type++;
+            if (more_arti<0)
+                arti--, more_arti=0;
+        }
+        while (*arti!='\0' && *type!='0') {
+            if (*arti==*type) {
+                cnt++;
+                arti++, type++;
+            } else if (*type == '<') {
+                if (arti == &a[0]) 
+                    type++;
+                else {
+                    cnt--;
+                    type++, arti--;
+                }
+            } else arti++, type++;
+        }
+    }
+
+    return cnt;
+}
+
 int main() {
-  string a = "", b="";
-  string tmp;
+    string tmp;
+    vector<string> arti;
+    vector<string> type;
+    double time;
 
-  getline(cin, tmp);
-  while (tmp!="EOF") {
-    a += tmp;
-    a += "\n";
     getline(cin, tmp);
-  }
-
-  getline(cin, tmp);
-  while (tmp!="EOF") {
-    while(tmp[0]=='<')
-      // tmp = tmp.substr(1, tmp.size());
-      tmp = tmp.substr(1);
-      
-    for (int i=0; i<tmp.size(); i++) {
-      if (tmp[i]=='<') {
-        // tmp = tmp.substr(0, i-1) + tmp.substr(i+1);
-        tmp = tmp.substr(0, i-1) + tmp.substr(i+1);        
-        i-=2;
-      }
+    while (tmp!="EOF") {
+        arti.push_back(tmp);
+        getline(cin, tmp);
     }
-    
-    b += tmp;
-    b += "\n";
     getline(cin, tmp);
-  }
-
-  int t=0;
-  int count = 0;
-  cin >> t;
-
-  // cout << a;
-  char* ap = &a[0];
-  char* bp = &b[0];
-
-  while (*ap != '\0' || *bp != '\0') {
-    if (*ap == '\n') {
-      ap++;
-      while (*bp!='\n') {
-        bp++;
-      }
-      bp++;
-      continue;
+    while (tmp!="EOF") {
+        type.push_back(tmp);
+        getline(cin, tmp);
     }
-    
-    if (*bp == '\n') {
-      bp++;
-      while (*ap!='\n') {
-        ap++;
-      }
-      ap++;
-      continue;
-    }
-    
-    if (*ap == *bp) {
-      count++;
+    cin >> time;
+
+    int cnt = 0;
+    for (int i=0; i<arti.size() ; i++) {
+        cnt += count_type(arti[i], type[i]);
     }
 
-    ap++;
-    bp++;
-  }
+    double pwm = cnt*60/time;
+    // cout << pwm;
+    printf("%d", (int)round(pwm));
+    // cout << round(pwm);
 
-  printf("%d", count*60/t);
-  
-  // string a;
-  // getline(cin, a);
-  // cout << a[a.size()];
-  // cout << 1;
+    return 0;
 }
