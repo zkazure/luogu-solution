@@ -1,3 +1,25 @@
+// ====== crazy solution =======
+#include <bits/stdc++.h>
+using namespace std;
+
+int count(const int& n) {
+    int a, b, ans = 0;
+    for (int i=1; i<=n; i*=10) {
+        a = n/i, b = n%i;
+        ans += (a+7)/10*i + (a%10==2)*(b+1);
+    }
+    return ans;
+}
+
+int main() {
+    int l, r;
+    cin >> l >> r;
+    cout << count(r) - count(l-1);
+    return 0;
+}
+
+
+// ====== my solution ======
 #include <bits/stdc++.h>
 using namespace std;
 
