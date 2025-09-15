@@ -1,3 +1,32 @@
+// ====== crazy solution ========
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(int max_score, const string& s) {
+    int a=0, b=0;
+    for (const char score : s) {
+        (score=='W') ? a++ : b++;
+
+        if ( max(a,b)>=max_score && abs(a-b)>=2 ) {
+            cout << a << ":" << b << "\n";
+            a=0, b=0;
+        }
+    }
+    cout << a << ":" << b << "\n\n";
+}
+
+int main() {
+    string s = "";
+    char c;
+    while (cin>>c && c!='E')
+        s += c;
+    solve(11, s);
+    solve(21, s);
+
+    return 0;
+}
+
+// ======== my solution ========
 #include <bits/stdc++.h>
 using namespace std;
 
